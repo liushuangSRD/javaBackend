@@ -1,5 +1,6 @@
 package net.javaguides.springboot.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import net.javaguides.springboot.entity.Wallet;
@@ -40,6 +41,12 @@ public class WalletController {
         }
         wallet.setMoney(wallet.getMoney() - 100);
         this.walletRepository.save(wallet);
+        WalletDetail detail = new WalletDetail();
+        detail.setUserId(wallet.getUserId());
+        detail.setUserName(wallet.getUserName());
+        detail.setMoney(-100);
+        detail.setCreateDate(new Date());
+        detailRepository.save(detail);
         return wallet;
     }
 
@@ -52,6 +59,13 @@ public class WalletController {
         }
         wallet.setMoney(wallet.getMoney()+20);
         this.walletRepository.save(wallet);
+
+        WalletDetail detail = new WalletDetail();
+        detail.setUserId(wallet.getUserId());
+        detail.setUserName(wallet.getUserName());
+        detail.setMoney(20);
+        detail.setCreateDate(new Date());
+        detailRepository.save(detail);
         return wallet;
     }
 
